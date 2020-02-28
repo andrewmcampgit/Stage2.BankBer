@@ -58,6 +58,7 @@ $(function () {
 
     // Add click event to the submit transaction button
     $("#submit-new-transaction-btn").click(function () {
+        $("#pick-account-div").slideUp("fast"); 
         $.ajax({
             url: `http://localhost:2226/api/transactions`,
             method: "POST",
@@ -66,7 +67,7 @@ $(function () {
                 Amount: $("#new-transaction-amount").val(),
                 Type: $("#new-transaction-type option:selected").val(),
                 Timestamp: $("#new-transaction-date").val(),
-                Description: $("new-transaction-description").val()
+                Description: $("#new-transaction-description").val()
             }
         })
             .fail(function (err) {
@@ -95,11 +96,13 @@ function populateTransactionList(transactions) {
         
        
         // Could not get this to work
-        if (transaction.Description == null){
+        if (transaction.Description  == null){
             transaction.Description = "No Description";
         }
         
         let Description = transaction.Description;
+    
+        //let newDescription = newTransaction.Description;
         
 
         let newTransaction = $(`<tr><td>${dateString}</td><td>$${Amount.toFixed(2)}</td><td>${transaction.Type}</td><td>${Description}</td></div>`)
