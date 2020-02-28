@@ -91,6 +91,7 @@ function populateTransactionList(transactions) {
     for (let transaction of transactions) {
         let transactionDate = new Date(transaction.Timestamp);
         let dateString = transactionDate.toDateString();
+        let Amount = transaction.Amount;
         
        
         // Could not get this to work
@@ -101,7 +102,7 @@ function populateTransactionList(transactions) {
         let Description = transaction.Description;
         
 
-        let newTransaction = $(`<tr><td>${dateString}</td><td>${transaction.Amount}</td><td>${transaction.Type}</td><td>${Description}</td></div>`)
+        let newTransaction = $(`<tr><td>${dateString}</td><td>$${Amount.toFixed(2)}</td><td>${transaction.Type}</td><td>${Description}</td></div>`)
         transactionList.append(newTransaction);
     }
 }
